@@ -3,7 +3,7 @@ import type { Unpacked, data } from "../utils";
 export default function Card(props: Unpacked<typeof data>) {
     const item = props;
     return (
-        <div className="flex lg:items-center bg-white p-8 pl-10 rounded-md drop-shadow-lg gap-6 border-white relative lg:flex-row flex-col">
+        <div className="flex lg:items-center bg-white p-8 lg:pt-8 pt-9 pl-10 rounded-md drop-shadow-lg gap-6 border-white relative lg:flex-row flex-col">
             {item.featured && (
                 <div className="absolute h-full left-0 top-0 w-[10px] rounded-l-md overflow-hidden">
                     <div className="h-full w-[5px] left-0 top-0 bg-dark_cyan"></div>
@@ -12,7 +12,7 @@ export default function Card(props: Unpacked<typeof data>) {
             <img
                 src={item.logo}
                 alt={item.company + " logo"}
-                className="lg:relative absolute size-12 lg:size-24 -top-6"
+                className="lg:relative absolute size-12 lg:size-24 -translate-y-[3.8rem] lg:translate-y-0"
             />
             <div className="flex flex-col">
                 <div className="flex gap-2 items-center">
