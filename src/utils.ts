@@ -161,3 +161,5 @@ export const data = [
         tools: ["React", "Sass"],
     },
 ];
+
+export type Unpacked<T> = T extends (infer U)[] ? U : T;
