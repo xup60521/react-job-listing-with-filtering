@@ -18,7 +18,7 @@ export default function App() {
                     className="w-full lg:hidden block"
                 />
             </header>
-            <main className="w-full flex flex-col lg:px-[10vw] lg:py-20 gap-4">
+            <main className="w-full flex flex-col lg:px-[10vw] px-6 lg:py-20 py-16 lg:gap-4 gap-10">
                 {data.map((item) => {
                     return <Card {...item} key={item.id} />;
                 })}
