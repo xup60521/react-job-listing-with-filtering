@@ -1,9 +1,12 @@
 import type { Unpacked, data } from "../utils";
+import { useSetFilterElm } from "./FilterElmProvider";
+import TagButton from "./TagButton";
 
 export default function Card(props: Unpacked<typeof data>) {
     const item = props;
+    const setFilterElm = useSetFilterElm();
     return (
-        <div className="flex lg:items-center bg-white p-8 lg:pt-8 pt-9 pl-10 rounded-md drop-shadow-lg gap-6 border-white relative lg:flex-row flex-col">
+        <div className="flex lg:items-center lg:mb-4 mb-10 bg-white p-8 lg:pt-8 pt-9 lg:pl-10 pl-6 rounded-md drop-shadow-lg gap-6 border-white relative lg:flex-row flex-col">
             {item.featured && (
                 <div className="absolute h-full left-0 top-0 w-[10px] rounded-l-md overflow-hidden">
                     <div className="h-full w-[5px] left-0 top-0 bg-dark_cyan"></div>
@@ -50,24 +53,47 @@ export default function Card(props: Unpacked<typeof data>) {
                         {item.location}
                     </span>
                 </div>
-                <div className="p-1 w-full lg:hidden border-b-[1px] -mb-1 mt-1 border-dark_grayish_cyan">
-
-                </div>
+                <div className="p-1 w-full lg:hidden border-b-[1px] -mb-1 mt-1 border-dark_grayish_cyan"></div>
             </div>
             <div className="flex-grow flex lg:justify-end gap-3 flex-wrap">
-                <button className="font-league bg-light_cyan text-dark_cyan font-bold p-2 py-1">
+                <TagButton
+                    onMouseDown={() =>
+                        setFilterElm((prev) => {
+                            prev.role = item.role;
+                            return { ...prev };
+                        })
+                    }
+                >
                     {item.role}
-                </button>
-                <button className="font-league bg-light_cyan text-dark_cyan font-bold p-2 py-1">
+                </TagButton>
+                <TagButton
+                    onMouseDown={() =>
+                        setFilterElm((prev) => {
+                            prev.level = item.level;
+                            return { ...prev };
+                        })
+                    }
+                >
                     {item.level}
-                </button>
+                </TagButton>
                 {item.languages.map((d) => (
-                    <button
+                    <TagButton
+                        onMouseDown={() =>
+                            setFilterElm((prev) => {
+                                const { languages } = prev;
+                                if (languages.includes(d)) {
+                                    return { ...prev };
+                                }
+                                if (!languages.includes(d)) {
+                                    prev.languages = [...languages, d];
+                                }
+                                return { ...prev };
+                            })
+                        }
                         key={d}
-                        className="font-league bg-light_cyan text-dark_cyan font-bold p-2 py-1"
                     >
                         {d}
-                    </button>
+                    </TagButton>
                 ))}
             </div>
         </div>

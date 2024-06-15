@@ -9,6 +9,14 @@ import INSURE from "/images/insure.svg";
 import EYECAM from "/images/eyecam-co.svg";
 import THE from "/images/the-air-filter-company.svg";
 
+export type Unpacked<T> = T extends (infer U)[] ? U : T;
+
+export type FilterElmType = {
+    role: string | null;
+    level: string | null;
+    languages: string[];
+};
+
 export const data = [
     {
         id: 1,
@@ -161,5 +169,3 @@ export const data = [
         tools: ["React", "Sass"],
     },
 ];
-
-export type Unpacked<T> = T extends (infer U)[] ? U : T;
